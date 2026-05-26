@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>चण्डिका शैक्षिक पात्रो २०८३</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Poppins', 'Noto Sans Nepali', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #673AB7 0%, #9C27B0 100%);
+            min-height: 100vh;
+            padding: 12px;
+        }
+
+        .app-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .app-bar {
+            background: #673AB7;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .app-title {
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.18);
+            border: none;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #673AB7;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .content {
+            padding: 18px 14px;
+            min-height: 540px;
+            background: #faf8ff;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .month-selector {
+            background: #ede7f6;
+            padding: 8px 12px;
+            border-radius: 40px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .creator-name {
+            font-size: 12px;
+            color: #4a2c7a;
+            font-weight: 600;
+        }
+
+        .month-dropdown {
+            background: white;
+            border: 1px solid #7b4fbe;
+            border-radius: 40px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: #4a2c7a;
+            cursor: pointer;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .week-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: white;
+            border-bottom: 2px solid #d1c4e9;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-radius: 16px;
+        }
+
+        .week-day {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #4a2c7a;
+        }
+
+        .week-day.weekend {
+            color: #d32f2f;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            background: #e9e4f0;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+
+        .calendar-day {
+            background: white;
+            min-height: 68px;
+            padding: 6px 3px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-day:hover {
+            background: #e1d5f0;
+            transform: scale(0.97);
+        }
+
+        .day-number {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .day-emoji {
+            font-size: 10px;
+        }
+
+        .today {
+            background: #4caf50;
+            color: white;
+            box-shadow: 0 2px 8px rgba(76,175,80,0.3);
+        }
+
+        .today .day-number {
+            color: white;
+        }
+
+        .weekend-day {
+            background: #ffebee;
+        }
+
+        .holiday-day {
+            background: #ffcdd2;
+        }
+
+        .activity-day {
+            background: #e3f2fd;
+        }
+
+        /* महिनाको तथ्यांक कार्ड */
+        .stats-card {
+            background: linear-gradient(135deg, #673AB7, #7B1FA2);
+            border-radius: 20px;
+            padding: 12px;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            padding: 24px;
+            max-width: 340px;
+            width: 85%;
+            text-align: center;
+            animation: fadeInUp 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0;}
+            to { transform: translateY(0); opacity: 1;}
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #4a2c7a;
+        }
+
+        .modal-body {
+            margin-bottom: 24px;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            background: #673AB7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .calc-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .calc-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a2c7a;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5e35b1;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #d1c4e9;
+            border-radius: 28px;
+            font-size: 15px;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #673AB7;
+        }
+
+        .calc-btn {
+            background: #673AB7;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .calc-btn:hover {
+            background: #542e97;
+            transform: scale(0.98);
+        }
+
+        .result-card {
+            border-radius: 24px;
+            padding: 18px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .result-success {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+        }
+
+        .result-fail {
+            background: linear-gradient(135deg, #f44336, #c62828);
+            color: white;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 28px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .contact-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a2c7a;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0eef5;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-name {
+            font-weight: 700;
+            color: #1e1a2f;
+        }
+
+        .contact-role {
+            font-size: 11px;
+            color: #6b5b8b;
+        }
+
+        .call-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f5f2fc;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .link-item:hover {
+            background: #e8e2f7;
+            transform: translateX(5px);
+        }
+
+        .link-icon {
+            font-size: 28px;
+            margin-right: 12px;
+        }
+
+        .link-text {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: bold;
+            color: #4a2c7a;
+        }
+
+        .link-url {
+            font-size: 10px;
+            color: #7d6b9e;
+        }
+
+        .bottom-bar {
+            background: linear-gradient(90deg, #673AB7, #8e24aa);
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .phone-number {
+            background: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            color: #673AB7;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .app-title {
+                font-size: 13px;
+            }
+            .nav-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            .calendar-day {
+                min-height: 58px;
+                padding: 4px 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <div class="app-bar">
+        <div class="app-title">📅 चण्डिका शैक्षिक पात्रो २०८३ 🎓</div>
+        <div class="nav-buttons">
+            <button class="nav-btn active" data-page="calendar">📅 पात्रो</button>
+            <button class="nav-btn" data-page="tsc">🧮 TSC</button>
+            <button class="nav-btn" data-page="contact">📞 सम्पर्क</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- पात्रो पेज -->
+        <div id="calendarPage" class="page active-page">
+            <div class="month-selector">
+                <span class="creator-name">निर्माणकर्ता: गणेश कुमार थापा</span>
+                <select id="monthSelect" class="month-dropdown"></select>
+            </div>
+            <div class="week-days" id="weekDays"></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <div class="stats-card" id="statsCard"></div>
+        </div>
+
+        <!-- TSC क्याल्कुलेटर पेज -->
+        <div id="tscPage" class="page">
+            <div class="calc-card">
+                <div class="calc-title">🧮 TSC नतिजा क्याल्कुलेटर</div>
+                <div class="input-group">
+                    <label>📝 जम्मा प्रश्नको संख्या (अधिकतम ५०)</label>
+                    <input type="number" id="totalQuestions" placeholder="जम्मा प्रश्न">
+                </div>
+                <div class="input-group">
+                    <label>✅ सही उत्तरको संख्या</label>
+                    <input type="number" id="correctAnswers" placeholder="सही उत्तर">
+                </div>
+                <button class="calc-btn" onclick="calculateTSC()">🔢 नतिजा हेर्नुहोस्</button>
+            </div>
+            <div id="tscResult" style="display: none;"></div>
+        </div>
+
+        <!-- सम्पर्क पेज -->
+        <div id="contactPage" class="page">
+            <div class="contact-card">
+                <div class="contact-title">🏫 विद्यालय सम्पर्क सूची</div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">कमल फुयाल</div><div class="contact-role">प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9855070723">📞 9855070723</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">दुर्गा सञ्जेल</div><div class="contact-role">सहायक प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9804201173">📞 9804201173</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">रमेश पौडेल</div><div class="contact-role">सहायक प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9845071747">📞 9845071747</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">बालकृष्ण श्रेष्ठ</div><div class="contact-role">माध्यमिक संयोजक</div></div><button class="call-btn" data-phone="9841599258">📞 9841599258</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">चण्डिका घिमिरे</div><div class="contact-role">आधारभूत संयोजक</div></div><button class="call-btn" data-phone="9865212414">📞 9865212414</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">बिर बहादुर गोले</div><div class="contact-role">सूचना अधिकारी</div></div><button class="call-btn" data-phone="9845463004">📞 9845463004</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">खेमराज पोख्रेल</div><div class="contact-role">लेखा अधिकृत</div></div><button class="call-btn" data-phone="9845289466">📞 9845289466</button></div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-title">🔗 उपयोगी लिंकहरू</div>
+                <div class="link-item" data-url="https://moecdc.gov.np"><div class="link-icon">🏛️</div><div class="link-text"><div class="link-title">शिक्षा विकास निर्देशनालय</div><div class="link-url">moecdc.gov.np</div></div><div>🔗</div></div>
+                <div class="link-item" data-url="https://tsc.gov.np"><div class="link-icon">📜</div><div class="link-text"><div class="link-title">TSC नेपाल आधिकारिक</div><div class="link-url">tsc.gov.np</div></div><div>🔗</div></div>
+                <div class="link-item" data-url="https://cdc.gov.np"><div class="link-icon">📖</div><div class="link-text"><div class="link-title">पाठ्यक्रम विकास केन्द्र (CDC)</div><div class="link-url">cdc.gov.np</div></div><div>🔗</div></div>
+                <div class="link-item" data-url="https://moedcd.gov.np"><div class="link-icon">📚</div><div class="link-text"><div class="link-title">पाठ्यक्रम विकास केन्द्र</div><div class="link-url">moedcd.gov.np</div></div><div>🔗</div></div>
+                <div class="link-item" data-url="https://tscresult.gov.np"><div class="link-icon">📊</div><div class="link-text"><div class="link-title">TSC नतिजा हेर्ने साइट</div><div class="link-url">tscresult.gov.np</div></div><div>🔗</div></div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-title">🚨 आपत्कालीन सम्पर्क</div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">प्रहरी</div></div><button class="call-btn" data-phone="100">📞 100</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">एम्बुलेन्स</div></div><button class="call-btn" data-phone="102">📞 102</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">अग्नि नियन्त्रक</div></div><button class="call-btn" data-phone="101">📞 101</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        📞 समस्या भए सम्पर्क गर्नुहोस्
+        <span class="phone-number" data-copy="9845285331">9845285331 (कपी)</span>
+    </div>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header" id="modalTitle"></div>
+        <div class="modal-body" id="modalBody"></div>
+        <button class="modal-close" onclick="closeModal()">बन्द गर्नुहोस्</button>
+    </div>
+</div>
+
+<script>
+    // ==================== डाटा ====================
+    const months = ["बैशाख", "जेठ", "असार", "श्रावण", "भदौ", "आश्विन", "कार्तिक", "मंसिर", "पुष", "माघ", "फागुन", "चैत्र"];
+    const daysInMonth = [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30];
+    const weekDays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहिबार", "शुक्रबार", "शनिबार"];
+    const bsYear = 2083;
+
+    // महिनाको तथ्यांक (विद्यालय खुल्ने दिन, पढाइ हुने दिन, बर्षे बिदा, स्थानिय बिदा)
+    const schoolData = {
+        1: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 8, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        2: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        3: { "विद्यालय खुल्ने दिन": 24, "अध्यापन हुने दिन": 24, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        4: { "विद्यालय खुल्ने दिन": 19, "अध्यापन हुने दिन": 19, "बर्षे बिदा": 12, "स्थानिय बिदा": 0 },
+        5: { "विद्यालय खुल्ने दिन": 18, "अध्यापन हुने दिन": 18, "बर्षे बिदा": 3, "स्थानिय बिदा": 0 },
+        6: { "विद्यालय खुल्ने दिन": 17, "अध्यापन हुने दिन": 17, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        7: { "विद्यालय खुल्ने दिन": 1, "अध्यापन हुने दिन": 1, "बर्षे बिदा": 13, "स्थानिय बिदा": 0 },
+        8: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 1, "स्थानिय बिदा": 0 },
+        9: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        10: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        11: { "विद्यालय खुल्ने दिन": 15, "अध्यापन हुने दिन": 15, "बर्षे बिदा": 1, "स्थानिय बिदा": 0 },
+        12: { "विद्यालय खुल्ने दिन": 22, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 }
+    };
+
+    // बिदा (होलीडे) - पूरा डाटा
+    let holidays = {
+        "1-1": "🎉 नयाँ बर्ष", "1-18": "🎉 मजदुर दिवस", "1-24": "🎉 प्रदेश भाषा दिवस",
+        "2-14": "🎉 बक्ररित पर्व", "2-15": "🎉 गणतन्त्र दिवस", "4-18": "🌧️☔ वर्षे बिदा",
+        "5-12": "🌧️ रक्षा बन्धन", "5-19": "🏝️📅 श्रीकृष्णाष्ठमी", "6-3": "📜 संविधान दिवस 🇳🇵",
+        "6-25": "🌱 घटस्थापना", "6-31": "🌿 फुलपाति", "7-1": "🗡️ महाअष्ठमी",
+        "7-4": "🎊 विजयादशमी", "7-22": "लक्ष्मी पूजा 💰🪔🙏", "7-23": "गाइ तिहार 🐄🌸✨",
+        "7-24": "गोरू तिहार 🐂🎉🚜", "7-25": "भाई टिका 🖌️👦👧❤️", "7-29": "🏖️ छठपर्व",
+        "9-9": "🏖️ उभौली पर्व", "9-10": "🌧️ क्रिसमस डे", "9-15": "🏖️ तमु ल्होसार",
+        "10-1": "🏖️ माघे सक्रान्ति", "10-24": "🏖️ सोनाम ल्होसार", "11-7": "🌧️प्रजातन्त्र दिवस",
+        "11-24": "🏖️ नारी दिवस", "11-25": "🌧️ग्लाल्पो ल्होसार", "11-26": "🌧️☔ वर्षे बिदा"
+    };
+    
+    // रेन्ज बिदा (दशै, वर्षे)
+    for (let i = 26; i <= 30; i++) holidays[`6-${i}`] = "🏖️ दशै बिदा";
+    for (let i = 19; i <= 29; i++) holidays[`4-${i}`] = "🌧️☔ वर्षे बिदा";
+    for (let i = 5; i <= 7; i++) holidays[`7-${i}`] = "🏖️ दशै बिदा";
+    for (let i = 9; i <= 20; i++) holidays[`7-${i}`] = "🌧️☔ वर्षे बिदा";
+    holidays["7-26"] = "🏖️ तिहार बिदा";
+    holidays["7-27"] = "🌧️☔ वर्षे बिदा";
+    holidays["8-4"] = "🌧️☔ वर्षे बिदा";
+
+    // गतिविधिहरू
+    let activities = {
+        "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting", "2-8": "🗳️ बिद्यालय मतदान",
+        "2-26": "🗳️छात्रावृत्ति बितरण", "2-29": "🥎 🏛️ Staff meeting", "3-26": "🗳️ चित्रकला/Quiz",
+        "3-32": "🏛️ Staff meeting", "4-7": "✍️ English Exam", "4-8": "✍️ Nepali Exam",
+        "4-11": "✍️ Mathematic Exam", "4-12": "✍️ Science Exam", "4-13": "✍️ Local/Social Exam",
+        "4-14": "✍️ HPE/OPT1 Exam", "4-15": "✍️ OPT2 Exam/Staff meeting", "5-25": "🏛️ Staff meeting",
+        "5-29": "✍️ बाल दिवस", "6-2": "🗳️ गणित तथा बिज्ञान प्रदर्शनी", "6-23": "🗳️दशै बिशेष कार्यक्रम",
+        "8-28": "🏛️ Staff meeting", "8-29": "✍️ English Exam", "9-2": "✍️ Nepali Exam",
+        "9-1": "✍️ Mathematic Exam", "9-3": "✍️ Social Exam", "9-6": "✍️ Science Exam",
+        "9-7": "✍️ HPE/OPT1 Exam", "9-8": "✍️ OPT2 Exam", "9-30": "🏛️ Staff meeting",
+        "10-8": "🗳️योगा कार्यक्रम", "10-28": "🗳️श्रीपञ्चमी", "10-29": "🏛️ Staff meeting",
+        "11-10": "🗳️ खेलकुद", "11-11": "🗳️बिद्यालय बार्षिकोत्सव", "11-28": "🏛️ Staff meeting",
+        "12-18": "✍️ English Exam", "12-19": "✍️ Nepali Exam", "12-22": "✍️ Mathematic Exam",
+        "12-23": "✍️ Social Exam", "12-24": "✍️ HPE/OPT1 Exam", "12-25": "✍️ Science Exam",
+        "12-26": "✍️ Local/OPT2 Exam", "12-30": "🏆📊🎉 नतिजा प्रकाशन/Staff meeting"
+    };
+    
+    // भर्ना अभियान
+    for (let i = 15; i <= 17; i++) activities[`1-${i}`] = "🏖️ भर्ना अभियान";
+
+    // 2083 महिनाको सुरुवाती दिन (गणना गरिएको)
+    const startDays = [2, 5, 0, 3, 5, 1, 4, 6, 2, 4, 0, 3];
+
+    let currentMonth = 0;
+
+    // BS मिति पत्ता लगाउने (सही conversion)
+    function getCurrentBSDate() {
+        const startBS = new Date(2026, 3, 14); // 2083/01/01 = 2026 April 14
+        const today = new Date();
+        
+        // समय क्षेत्रको समस्या हटाउन
+        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+        const startUTC = new Date(Date.UTC(2026, 3, 14));
+        
+        const diffDays = Math.floor((todayUTC - startUTC) / (1000 * 60 * 60 * 24));
+        
+        if (diffDays < 0) return { month: 1, day: 1 };
+        let remaining = diffDays;
+        for (let i = 0; i < daysInMonth.length; i++) {
+            if (remaining < daysInMonth[i]) {
+                return { month: i + 1, day: remaining + 1 };
+            }
+            remaining -= daysInMonth[i];
+        }
+        return { month: 1, day: 1 };
+    }
+
+    // महिनाको तथ्यांक देखाउने
+    function renderStats() {
+        const monthNum = currentMonth + 1;
+        const stats = schoolData[monthNum] || { "विद्यालय खुल्ने दिन": 0, "अध्यापन हुने दिन": 0, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 };
+        
+        const statsCard = document.getElementById('statsCard');
+        if (statsCard) {
+            statsCard.innerHTML = `
+                <div class="stat-item"><div class="stat-label">🏫 विद्यालय खुल्ने दिन</div><div class="stat-value">${stats["विद्यालय खुल्ने दिन"]}</div></div>
+                <div class="stat-item"><div class="stat-label">📚 अध्यापन हुने दिन</div><div class="stat-value">${stats["अध्यापन हुने दिन"]}</div></div>
+                <div class="stat-item"><div class="stat-label">🌧️ बर्षे बिदा</div><div class="stat-value">${stats["बर्षे बिदा"]}</div></div>
+                <div class="stat-item"><div class="stat-label">🏖️ स्थानिय बिदा</div><div class="stat-value">${stats["स्थानिय बिदा"]}</div></div>
+            `;
+        }
+    }
+
+    function renderWeekDays() {
+        const container = document.getElementById('weekDays');
+        container.innerHTML = '';
+        weekDays.forEach(day => {
+            const div = document.createElement('div');
+            div.className = `week-day ${(day === 'आइतबार' || day === 'शनिबार') ? 'weekend' : ''}`;
+            div.textContent = day;
+            container.appendChild(div);
+        });
+    }
+
+    // तारिख देखि दिन बाँकी/अघि गणना
+    function getDaysRemaining(month, day) {
+        const todayBS = getCurrentBSDate();
+        const targetDate = { month: month, day: day };
+        
+        // target date को दिन नम्बर निकाल्ने
+        function getDayOfYear(month, day) {
+            let days = 0;
+            for (let i = 0; i < month - 1; i++) {
+                days += daysInMonth[i];
+            }
+            days += day;
+            return days;
+        }
+        
+        const todayDays = getDayOfYear(todayBS.month, todayBS.day);
+        const targetDays = getDayOfYear(targetDate.month, targetDate.day);
+        const diff = targetDays - todayDays;
+        
+        if (diff === 0) return "आजको मिति";
+        if (diff > 0) return `${diff} दिन बाँकी`;
+        return `${Math.abs(diff)} दिन अघि`;
+    }
+
+    function renderCalendar() {
+        const monthNum = currentMonth + 1;
+        const days = daysInMonth[currentMonth];
+        const start = startDays[currentMonth];
+        const grid = document.getElementById('calendarGrid');
+        grid.innerHTML = '';
+        
+        // खाली सेलहरू
+        for (let i = 0; i < start; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'calendar-day';
+            empty.style.background = '#f9f7fc';
+            empty.style.pointerEvents = 'none';
+            grid.appendChild(empty);
+        }
+        
+        const todayBS = getCurrentBSDate();
+        
+        for (let day = 1; day <= days; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
+            const weekdayIdx = (start + day - 1) % 7;
+            const isWeekend = (weekdayIdx === 0 || weekdayIdx === 6);
+            const key = `${monthNum}-${day}`;
+            const isHoliday = holidays[key];
+            const isActivity = activities[key];
+            const isToday = (todayBS.month === monthNum && todayBS.day === day);
+            
+            if (isToday) {
+                dayDiv.classList.add('today');
+            } else if (isWeekend) {
+                dayDiv.classList.add('weekend-day');
+            }
+            if (isHoliday && !isToday) {
+                dayDiv.classList.add('holiday-day');
+            }
+            if (isActivity && !isHoliday && !isToday) {
+                dayDiv.classList.add('activity-day');
+            }
+            
+            let emoji = '';
+            if (isHoliday) emoji = '🎉';
+            else if (isActivity) emoji = '📌';
+            
+            dayDiv.innerHTML = `<div class="day-number">${day}</div><div class="day-emoji">${emoji}</div>`;
+            dayDiv.onclick = (function(m, d) { return function() { showDateDetails(m, d); }; })(monthNum, day);
+            grid.appendChild(dayDiv);
+        }
+    }
+
+    function showDateDetails(month, day) {
+        const key = `${month}-${day}`;
+        const hol = holidays[key];
+        const act = activities[key];
+        const daysLeft = getDaysRemaining(month, day);
+        
+        let bodyMsg = `<p>📅 मिति: ${months[month-1]} ${day}, ${bsYear}</p>`;
+        bodyMsg += `<p>🕒 ${daysLeft}</p>`;
+        if(hol) bodyMsg += `<p>🎉 <strong>बिदा:</strong> ${hol}</p>`;
+        if(act) bodyMsg += `<p>📌 <strong>गतिविधि:</strong> ${act}</p>`;
+        if(!hol && !act) bodyMsg += `<p>🙁 कुनै बिशेष गतिविधि छैन</p>`;
+        
+        document.getElementById('modalTitle').innerHTML = `📅 ${months[month-1]} ${day}`;
+        document.getElementById('modalBody').innerHTML = bodyMsg;
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function changeMonth() {
+        currentMonth = parseInt(document.getElementById('monthSelect').value);
+        renderCalendar();
+        renderStats();  // महिना छान्दा तथ्यांक अपडेट गर्ने
+    }
+
+    function initCalendar() {
+        renderWeekDays();
+        const select = document.getElementById('monthSelect');
+        months.forEach((m, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = m;
+            select.appendChild(opt);
+        });
+        
+        // आजको महिना सेट गर्ने
+        const todayBS = getCurrentBSDate();
+        currentMonth = todayBS.month - 1;
+        if (currentMonth < 0) currentMonth = 0;
+        select.value = currentMonth;
+        
+        // महिना परिवर्तनको event listener
+        select.addEventListener('change', changeMonth);
+        
+        renderCalendar();
+        renderStats();  // सुरुमा पनि तथ्यांक देखाउने
+    }
+
+    // TSC क्याल्कुलेटर
+    window.calculateTSC = function() {
+        const total = parseInt(document.getElementById('totalQuestions').value);
+        const correct = parseInt(document.getElementById('correctAnswers').value);
+        const resultDiv = document.getElementById('tscResult');
+        
+        if (isNaN(total) || isNaN(correct)) {
+            resultDiv.innerHTML = '<div class="calc-card" style="color:#c62828;">⚠️ कृपया दुवै फाँट भर्नुहोस्!</div>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        if (total > 50) {
+            resultDiv.innerHTML = '<div class="calc-card" style="color:#c62828;">❌ जम्मा प्रश्न ५० भन्दा बढी हुन सक्दैन!</div>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        if (total <= 0) {
+            resultDiv.innerHTML = '<div class="calc-card" style="color:#c62828;">❌ जम्मा प्रश्न ० भन्दा बढी हुनुपर्छ!</div>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        if (correct > total) {
+            resultDiv.innerHTML = `<div class="calc-card" style="color:#c62828;">❌ सही उत्तर ${total} भन्दा बढी हुन सक्दैन!</div>`;
+            resultDiv.style.display = 'block';
+            return;
+        }
+        if (correct < 0) {
+            resultDiv.innerHTML = '<div class="calc-card" style="color:#c62828;">❌ सही उत्तर ऋणात्मक हुन सक्दैन!</div>';
+            resultDiv.style.display = 'block';
+            return;
+        }
+        
+        const wrong = total - correct;
+        let marks = correct - (wrong * 0.2);
+        if (marks < 0) marks = 0;
+        const passed = marks >= 25;
+        
+        resultDiv.innerHTML = `
+            <div class="result-card ${passed ? 'result-success' : 'result-fail'}">
+                <div style="font-size:42px;">${passed ? '🎉' : '😢'}</div>
+                <div style="margin:10px 0; font-weight:bold;">${passed ? 'बधाई छ! तपाईं सफल हुनुभयो।' : 'क्षमा गर्नुहोस्! यस पटक सफल हुन सक्नुभएन।'}</div>
+                <div style="background:rgba(255,255,255,0.2); padding:8px; border-radius:40px;">प्राप्त अङ्क: ${marks.toFixed(2)}</div>
+            </div>`;
+        resultDiv.style.display = 'block';
+    };
+
+    // फोन कल, लिंक र कपी
+    function makeCall(phone) { 
+        window.location.href = `tel:${phone}`; 
+    }
+    function openLink(url) { 
+        window.open(url, '_blank'); 
+    }
+    function copyNumber(phone) { 
+        navigator.clipboard.writeText(phone); 
+        alert(`फोन नम्बर कपी गरियो: ${phone}`); 
+    }
+
+    // पेज नेभिगेसन
+    function switchPage(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+        document.getElementById(`${pageId}Page`).classList.add('active-page');
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.nav-btn[data-page="${pageId}"]`).classList.add('active');
+    }
+
+    // इभेन्ट ह्यान्डलरहरू
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchPage(btn.getAttribute('data-page')));
+    });
+    
+    document.querySelectorAll('.call-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            makeCall(btn.getAttribute('data-phone')); 
+        });
+    });
+    
+    document.querySelectorAll('.link-item').forEach(link => {
+        link.addEventListener('click', () => openLink(link.getAttribute('data-url')));
+    });
+    
+    document.querySelector('.phone-number')?.addEventListener('click', () => copyNumber('9845285331'));
+    
+    window.closeModal = () => {
+        document.getElementById('modal').style.display = 'none';
+    };
+    
+    document.getElementById('modal').addEventListener('click', (e) => { 
+        if(e.target === document.getElementById('modal')) closeModal(); 
+    });
+
+    // एप सुरु गर्ने
+    initCalendar();
+    switchPage('calendar');
+</script>
+</body>
+</html>
