@@ -50,16 +50,17 @@
         .nav-buttons {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .nav-btn {
             background: rgba(255,255,255,0.18);
             border: none;
             color: white;
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             transition: all 0.2s ease;
         }
@@ -95,6 +96,7 @@
             to { opacity: 1; transform: translateY(0);}
         }
 
+        /* क्यालेन्डर स्टाइल */
         .month-selector {
             background: #ede7f6;
             padding: 8px 12px;
@@ -208,7 +210,6 @@
             background: #e3f2fd;
         }
 
-        /* महिनाको तथ्यांक कार्ड */
         .stats-card {
             background: linear-gradient(135deg, #673AB7, #7B1FA2);
             border-radius: 20px;
@@ -239,6 +240,194 @@
             color: white;
         }
 
+        /* कन्भर्टर स्टाइल */
+        .converter-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .converter-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a2c7a;
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .date-input-group {
+            margin-bottom: 18px;
+        }
+
+        .date-input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5e35b1;
+            margin-bottom: 6px;
+        }
+
+        .date-input-group input, .date-input-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #d1c4e9;
+            border-radius: 28px;
+            font-size: 14px;
+            transition: 0.2s;
+            outline: none;
+            background: white;
+        }
+
+        .date-input-group input:focus, .date-input-group select:focus {
+            border-color: #673AB7;
+        }
+
+        .convert-btn {
+            background: #673AB7;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        .convert-btn:hover {
+            background: #542e97;
+            transform: scale(0.98);
+        }
+
+        .converted-result {
+            background: linear-gradient(135deg, #ede7f6, #d1c4e9);
+            border-radius: 24px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result-date {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a2c7a;
+        }
+
+        /* To-Do List स्टाइल */
+        .todo-card {
+            background: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .todo-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a2c7a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .todo-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input-group input {
+            flex: 1;
+            padding: 12px 14px;
+            border: 2px solid #d1c4e9;
+            border-radius: 28px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .todo-input-group input:focus {
+            border-color: #673AB7;
+        }
+
+        .add-todo-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .todo-list {
+            list-style: none;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f5f2fc;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+        }
+
+        .todo-item:hover {
+            background: #e8e2f7;
+        }
+
+        .todo-text {
+            flex: 1;
+            font-size: 14px;
+            color: #1e1a2f;
+            word-break: break-word;
+            cursor: pointer;
+        }
+
+        .todo-text.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .todo-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .delete-todo-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .todo-stats {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #d1c4e9;
+            font-size: 12px;
+            color: #6b5b8b;
+            text-align: center;
+        }
+
+        /* अन्य स्टाइल */
         .modal {
             display: none;
             position: fixed;
@@ -483,8 +672,8 @@
                 font-size: 13px;
             }
             .nav-btn {
-                padding: 5px 10px;
-                font-size: 11px;
+                padding: 4px 8px;
+                font-size: 10px;
             }
             .calendar-day {
                 min-height: 58px;
@@ -500,6 +689,8 @@
         <div class="nav-buttons">
             <button class="nav-btn active" data-page="calendar">📅 पात्रो</button>
             <button class="nav-btn" data-page="tsc">🧮 TSC</button>
+            <button class="nav-btn" data-page="converter">🔄 मिति रूपान्तरण</button>
+            <button class="nav-btn" data-page="todo">✅ To-Do List</button>
             <button class="nav-btn" data-page="contact">📞 सम्पर्क</button>
         </div>
     </div>
@@ -533,26 +724,78 @@
             <div id="tscResult" style="display: none;"></div>
         </div>
 
+        <!-- मिति रूपान्तरण पेज -->
+        <div id="converterPage" class="page">
+            <div class="converter-card">
+                <div class="converter-title">
+                    <span>📅</span> बि.सं. ↔ ई.सं. <span>📆</span>
+                </div>
+                
+                <!-- BS to AD -->
+                <div class="date-input-group">
+                    <label>🇳🇵 बि.सं. मिति → ई.सं.</label>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="bsYear" style="flex:2"></select>
+                        <select id="bsMonth" style="flex:1"></select>
+                        <select id="bsDay" style="flex:1"></select>
+                    </div>
+                </div>
+                <button class="convert-btn" onclick="convertBSToAD()">बि.सं. → ई.सं. रूपान्तरण</button>
+                
+                <!-- AD to BS -->
+                <div class="date-input-group" style="margin-top: 20px;">
+                    <label>🌍 ई.सं. मिति → बि.सं.</label>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="adYear" style="flex:2"></select>
+                        <select id="adMonth" style="flex:1"></select>
+                        <select id="adDay" style="flex:1"></select>
+                    </div>
+                </div>
+                <button class="convert-btn" onclick="convertADToBS()">ई.सं. → बि.सं. रूपान्तरण</button>
+                
+                <div id="converterResult" class="converted-result" style="display: none;">
+                    <div class="result-date" id="convertedDate"></div>
+                    <div style="font-size: 12px; margin-top: 5px;" id="convertedDay"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- To-Do List पेज -->
+        <div id="todoPage" class="page">
+            <div class="todo-card">
+                <div class="todo-title">
+                    📝 मेरो कार्यसूची
+                </div>
+                <div class="todo-input-group">
+                    <input type="text" id="todoInput" placeholder="नयाँ कार्य थप्नुहोस्...">
+                    <button class="add-todo-btn" onclick="addTodo()">➕ थप्नुहोस्</button>
+                </div>
+                <ul class="todo-list" id="todoList"></ul>
+                <div class="todo-stats" id="todoStats">
+                    कुनै कार्य छैन
+                </div>
+            </div>
+        </div>
+
         <!-- सम्पर्क पेज -->
         <div id="contactPage" class="page">
             <div class="contact-card">
                 <div class="contact-title">🏫 विद्यालय सम्पर्क सूची</div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">राजकुमार गोले</div><div class="contact-role">वि.व्य.स. अध्यक्ष</div></div><button class="call-btn" data-phone="9855074925">📞 9855074925</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">कमल फुयाल</div><div class="contact-role">प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9855070723">📞 9855070723</button></div>
-                <div class="contact-item"><div class="contact-info"><div class="contact-name">दुर्गा सञ्जेल</div><div class="contact-role">सहायक प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9804201173">📞 9804201173</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">दुर्गा सञ्जेल</div><div class="contact-role">सहायक प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9865085142">📞 9865025142</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">रमेश पौडेल</div><div class="contact-role">सहायक प्रधानाध्यापक</div></div><button class="call-btn" data-phone="9845071747">📞 9845071747</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">बालकृष्ण श्रेष्ठ</div><div class="contact-role">माध्यमिक संयोजक</div></div><button class="call-btn" data-phone="9841599258">📞 9841599258</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">चण्डिका घिमिरे</div><div class="contact-role">आधारभूत संयोजक</div></div><button class="call-btn" data-phone="9865212414">📞 9865212414</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">बिर बहादुर गोले</div><div class="contact-role">सूचना अधिकारी</div></div><button class="call-btn" data-phone="9845463004">📞 9845463004</button></div>
-                <div class="contact-item"><div class="contact-info"><div class="contact-name">खेमराज पोख्रेल</div><div class="contact-role">लेखा अधिकृत</div></div><button class="call-btn" data-phone="9845289466">📞 9845289466</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">खेमराज थिङ</div><div class="contact-role">लेखापाल</div></div><button class="call-btn" data-phone="9845289466">📞 9845289466</button></div>
             </div>
 
             <div class="contact-card">
                 <div class="contact-title">🔗 उपयोगी लिंकहरू</div>
                 <div class="link-item" data-url="https://moecdc.gov.np"><div class="link-icon">🏛️</div><div class="link-text"><div class="link-title">शिक्षा विकास निर्देशनालय</div><div class="link-url">moecdc.gov.np</div></div><div>🔗</div></div>
                 <div class="link-item" data-url="https://tsc.gov.np"><div class="link-icon">📜</div><div class="link-text"><div class="link-title">TSC नेपाल आधिकारिक</div><div class="link-url">tsc.gov.np</div></div><div>🔗</div></div>
-                <div class="link-item" data-url="https://cdc.gov.np"><div class="link-icon">📖</div><div class="link-text"><div class="link-title">पाठ्यक्रम विकास केन्द्र (CDC)</div><div class="link-url">cdc.gov.np</div></div><div>🔗</div></div>
-                <div class="link-item" data-url="https://moedcd.gov.np"><div class="link-icon">📚</div><div class="link-text"><div class="link-title">पाठ्यक्रम विकास केन्द्र</div><div class="link-url">moedcd.gov.np</div></div><div>🔗</div></div>
-                <div class="link-item" data-url="https://tscresult.gov.np"><div class="link-icon">📊</div><div class="link-text"><div class="link-title">TSC नतिजा हेर्ने साइट</div><div class="link-url">tscresult.gov.np</div></div><div>🔗</div></div>
+                <div class="link-item" data-url="https://www.moecdc.gov.np/"><div class="link-icon">📚</div><div class="link-text"><div class="link-title">पाठ्यक्रम विकास केन्द्र (CDC)</div><div class="link-url">moecdc.gov.np</div></div><div>🔗</div></div>
             </div>
 
             <div class="contact-card">
@@ -585,36 +828,39 @@
     const weekDays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहिबार", "शुक्रबार", "शनिबार"];
     const bsYear = 2083;
 
-    // महिनाको तथ्यांक (विद्यालय खुल्ने दिन, पढाइ हुने दिन, बर्षे बिदा, स्थानिय बिदा)
     const schoolData = {
-        1: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 8, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        2: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        3: { "विद्यालय खुल्ने दिन": 24, "अध्यापन हुने दिन": 24, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        4: { "विद्यालय खुल्ने दिन": 19, "अध्यापन हुने दिन": 19, "बर्षे बिदा": 12, "स्थानिय बिदा": 0 },
-        5: { "विद्यालय खुल्ने दिन": 18, "अध्यापन हुने दिन": 18, "बर्षे बिदा": 3, "स्थानिय बिदा": 0 },
-        6: { "विद्यालय खुल्ने दिन": 17, "अध्यापन हुने दिन": 17, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        7: { "विद्यालय खुल्ने दिन": 1, "अध्यापन हुने दिन": 1, "बर्षे बिदा": 13, "स्थानिय बिदा": 0 },
-        8: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 1, "स्थानिय बिदा": 0 },
-        9: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        10: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 },
-        11: { "विद्यालय खुल्ने दिन": 15, "अध्यापन हुने दिन": 15, "बर्षे बिदा": 1, "स्थानिय बिदा": 0 },
-        12: { "विद्यालय खुल्ने दिन": 22, "अध्यापन हुने दिन": 20, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 }
+        1: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 8, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        2: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        3: { "विद्यालय खुल्ने दिन": 24, "अध्यापन हुने दिन": 24, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        4: { "विद्यालय खुल्ने दिन": 19, "अध्यापन हुने दिन": 19, "वर्षे बिदा": 12, "स्थानिय बिदा": 0 },
+        5: { "विद्यालय खुल्ने दिन": 18, "अध्यापन हुने दिन": 18, "वर्षे बिदा": 3, "स्थानिय बिदा": 0 },
+        6: { "विद्यालय खुल्ने दिन": 17, "अध्यापन हुने दिन": 17, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        7: { "विद्यालय खुल्ने दिन": 1, "अध्यापन हुने दिन": 1, "वर्षे बिदा": 13, "स्थानिय बिदा": 0 },
+        8: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "वर्षे बिदा": 1, "स्थानिय बिदा": 0 },
+        9: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        10: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 20, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
+        11: { "विद्यालय खुल्ने दिन": 15, "अध्यापन हुने दिन": 15, "वर्षे बिदा": 1, "स्थानिय बिदा": 0 },
+        12: { "विद्यालय खुल्ने दिन": 22, "अध्यापन हुने दिन": 20, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 }
     };
 
-    // बिदा (होलीडे) - पूरा डाटा
     let holidays = {
-        "1-1": "🎉 नयाँ बर्ष", "1-18": "🎉 मजदुर दिवस", "1-24": "🎉 प्रदेश भाषा दिवस",
+        "1-1": "🎉 नयाँ वर्ष", "1-18": "🎉 मजदुर दिवस", "1-24": "🎉 प्रदेश भाषा दिवस",
         "2-14": "🎉 बक्ररित पर्व", "2-15": "🎉 गणतन्त्र दिवस", "4-18": "🌧️☔ वर्षे बिदा",
         "5-12": "🌧️ रक्षा बन्धन", "5-19": "🏝️📅 श्रीकृष्णाष्ठमी", "6-3": "📜 संविधान दिवस 🇳🇵",
-        "6-25": "🌱 घटस्थापना", "6-31": "🌿 फुलपाति", "7-1": "🗡️ महाअष्ठमी",
+        "6-25": "🌱 घटस्थापना", "6-31": "🌿 फुलपाति",
         "7-4": "🎊 विजयादशमी", "7-22": "लक्ष्मी पूजा 💰🪔🙏", "7-23": "गाइ तिहार 🐄🌸✨",
         "7-24": "गोरू तिहार 🐂🎉🚜", "7-25": "भाई टिका 🖌️👦👧❤️", "7-29": "🏖️ छठपर्व",
         "9-9": "🏖️ उभौली पर्व", "9-10": "🌧️ क्रिसमस डे", "9-15": "🏖️ तमु ल्होसार",
-        "10-1": "🏖️ माघे सक्रान्ति", "10-24": "🏖️ सोनाम ल्होसार", "11-7": "🌧️प्रजातन्त्र दिवस",
-        "11-24": "🏖️ नारी दिवस", "11-25": "🌧️ग्लाल्पो ल्होसार", "11-26": "🌧️☔ वर्षे बिदा"
+        "10-1": "🏖️ माघे सक्रान्ति", "10-24": "🏖️ सोनाम ल्होसार", "11-7": "🌧️ प्रजातन्त्र दिवस",
+        "11-24": "🏖️ नारी दिवस", "11-25": "🌧️ ग्लाल्पो ल्होसार", "11-26": "🌧️☔ वर्षे बिदा"
     };
     
-    // रेन्ज बिदा (दशै, वर्षे)
+    holidays["5-26"] = "🌧️☔ वर्षे बिदा";
+    holidays["5-30"] = "🌧️☔ वर्षे बिदा";
+    holidays["5-31"] = "🌧️☔ वर्षे बिदा";
+    holidays["7-2"] = "🗡️ महानवमी";
+    holidays["7-3"] = "🗡️ महानवमी";
+    
     for (let i = 26; i <= 30; i++) holidays[`6-${i}`] = "🏖️ दशै बिदा";
     for (let i = 19; i <= 29; i++) holidays[`4-${i}`] = "🌧️☔ वर्षे बिदा";
     for (let i = 5; i <= 7; i++) holidays[`7-${i}`] = "🏖️ दशै बिदा";
@@ -623,41 +869,250 @@
     holidays["7-27"] = "🌧️☔ वर्षे बिदा";
     holidays["8-4"] = "🌧️☔ वर्षे बिदा";
 
-    // गतिविधिहरू
     let activities = {
-        "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting", "2-8": "🗳️ बिद्यालय मतदान",
-        "2-26": "🗳️छात्रावृत्ति बितरण", "2-29": "🥎 🏛️ Staff meeting", "3-26": "🗳️ चित्रकला/Quiz",
-        "3-32": "🏛️ Staff meeting", "4-7": "✍️ English Exam", "4-8": "✍️ Nepali Exam",
-        "4-11": "✍️ Mathematic Exam", "4-12": "✍️ Science Exam", "4-13": "✍️ Local/Social Exam",
-        "4-14": "✍️ HPE/OPT1 Exam", "4-15": "✍️ OPT2 Exam/Staff meeting", "5-25": "🏛️ Staff meeting",
-        "5-29": "✍️ बाल दिवस", "6-2": "🗳️ गणित तथा बिज्ञान प्रदर्शनी", "6-23": "🗳️दशै बिशेष कार्यक्रम",
-        "8-28": "🏛️ Staff meeting", "8-29": "✍️ English Exam", "9-2": "✍️ Nepali Exam",
-        "9-1": "✍️ Mathematic Exam", "9-3": "✍️ Social Exam", "9-6": "✍️ Science Exam",
-        "9-7": "✍️ HPE/OPT1 Exam", "9-8": "✍️ OPT2 Exam", "9-30": "🏛️ Staff meeting",
-        "10-8": "🗳️योगा कार्यक्रम", "10-28": "🗳️श्रीपञ्चमी", "10-29": "🏛️ Staff meeting",
-        "11-10": "🗳️ खेलकुद", "11-11": "🗳️बिद्यालय बार्षिकोत्सव", "11-28": "🏛️ Staff meeting",
-        "12-18": "✍️ English Exam", "12-19": "✍️ Nepali Exam", "12-22": "✍️ Mathematic Exam",
-        "12-23": "✍️ Social Exam", "12-24": "✍️ HPE/OPT1 Exam", "12-25": "✍️ Science Exam",
-        "12-26": "✍️ Local/OPT2 Exam", "12-30": "🏆📊🎉 नतिजा प्रकाशन/Staff meeting"
+        "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting 🧑‍🏫👥",
+        "2-8": "🗳️ विद्यालय मतदान", "2-26": "🗳️ छात्रावृत्ति वितरण",
+        "2-29": "🥎 🏛️ Staff meeting 🧑‍🏫👥", "3-26": "🗳️ चित्रकला/Quiz",
+        "3-32": "🏛️ Staff meeting 🧑‍🏫👥", "4-7": "✍️ English Exam",
+        "4-8": "✍️ Nepali Exam", "4-11": "✍️ Mathematic Exam",
+        "4-12": "✍️ Science Exam", "4-13": "✍️ Local/Social Exam",
+        "4-14": "✍️ HPE/OPT1 Exam", "4-15": "✍️ OPT2 Exam/Staff meeting 🧑‍🏫👥",
+        "5-25": "🏛️ Staff meeting 🧑‍🏫👥", "5-29": "✍️ बाल दिवस",
+        "6-2": "🗳️ गणित तथा विज्ञान प्रदर्शनी", "6-23": "🗳️ दशै विशेष कार्यक्रम",
+        "8-28": "🏛️ Staff meeting 🧑‍🏫👥", "8-29": "✍️ English Exam",
+        "9-2": "✍️ Nepali Exam", "9-1": "✍️ Mathematic Exam",
+        "9-3": "✍️ Social Exam/serofero", "9-6": "✍️ Science Exam/Local(1-3)",
+        "9-7": "✍️ HPE/OPT1 Exam/School(0-3)", "9-8": "✍️ School(0-3)/Local/OPT2 Exam",
+        "9-30": "🏛️ Staff meeting 🧑‍🏫👥", "10-8": "🗳️ योगा कार्यक्रम",
+        "10-28": "🗳️ श्रीपञ्चमी", "10-29": "🏛️ Staff meeting 🧑‍🏫👥",
+        "11-10": "🗳️ खेलकुद", "11-11": "🎂 birthday wala emo 🎂",
+        "11-28": "🏛️ Staff meeting 🧑‍🏫👥", "12-18": "✍️ English Exam",
+        "12-19": "✍️ Nepali Exam", "12-22": "✍️ Mathematic Exam",
+        "12-23": "✍️ Social Exam", "12-24": "✍️ HPE/OPT1 Exam",
+        "12-25": "✍️ Science Exam", "12-26": "✍️ Local/OPT2 Exam",
+        "12-30": "🏆📊🎉 नतिजा प्रकाशन/Staff meeting 🧑‍🏫👥"
     };
     
-    // भर्ना अभियान
     for (let i = 15; i <= 17; i++) activities[`1-${i}`] = "🏖️ भर्ना अभियान";
 
-    // 2083 महिनाको सुरुवाती दिन (गणना गरिएको)
-    const startDays = [2, 5, 0, 3, 5, 1, 4, 6, 2, 4, 0, 3];
-
+    const startDays = [2, 5, 1, 5, 1, 4, 0, 2, 3, 5, 6, 1];
     let currentMonth = 0;
 
-    // BS मिति पत्ता लगाउने (सही conversion)
+    // BS to AD conversion (सरलीकृत)
+    const bsStartDate = new Date(1943, 3, 14); // 2000 BS = 1943 AD April 14
+    
+    function BSToAD(year, month, day) {
+        let totalDays = 0;
+        for (let y = 2000; y < year; y++) {
+            totalDays += (y % 4 === 0) ? 366 : 365;
+        }
+        for (let m = 1; m < month; m++) {
+            totalDays += daysInMonth[m - 1];
+        }
+        totalDays += day - 1;
+        
+        const adDate = new Date(bsStartDate);
+        adDate.setDate(adDate.getDate() + totalDays);
+        return adDate;
+    }
+    
+    function ADToBS(adDate) {
+        let diffDays = Math.floor((adDate - bsStartDate) / (1000 * 60 * 60 * 24));
+        if (diffDays < 0) return null;
+        
+        let year = 2000;
+        let remaining = diffDays;
+        
+        while (remaining >= 365) {
+            let daysInYear = (year % 4 === 0) ? 366 : 365;
+            if (remaining >= daysInYear) {
+                remaining -= daysInYear;
+                year++;
+            } else {
+                break;
+            }
+        }
+        
+        let month = 1;
+        for (let i = 0; i < daysInMonth.length; i++) {
+            if (remaining < daysInMonth[i]) {
+                month = i + 1;
+                break;
+            }
+            remaining -= daysInMonth[i];
+        }
+        let day = remaining + 1;
+        
+        return { year, month, day };
+    }
+
+    function convertBSToAD() {
+        const year = parseInt(document.getElementById('bsYear').value);
+        const month = parseInt(document.getElementById('bsMonth').value);
+        const day = parseInt(document.getElementById('bsDay').value);
+        
+        if (day > daysInMonth[month - 1]) {
+            document.getElementById('convertedDate').innerHTML = `❌ अमान्य मिति: ${months[month-1]} मा ${day} गते छैन`;
+            document.getElementById('converterResult').style.display = 'block';
+            return;
+        }
+        
+        const adDate = BSToAD(year, month, day);
+        const weekdays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहिबार", "शुक्रबार", "शनिबार"];
+        
+        document.getElementById('convertedDate').innerHTML = `📅 ${adDate.getFullYear()}-${adDate.getMonth()+1}-${adDate.getDate()} (ई.सं.)`;
+        document.getElementById('convertedDay').innerHTML = `${weekdays[adDate.getDay()]}`;
+        document.getElementById('converterResult').style.display = 'block';
+    }
+    
+    function convertADToBS() {
+        const year = parseInt(document.getElementById('adYear').value);
+        const month = parseInt(document.getElementById('adMonth').value) - 1;
+        const day = parseInt(document.getElementById('adDay').value);
+        
+        const adDate = new Date(year, month, day);
+        if (adDate.getMonth() !== month) {
+            document.getElementById('convertedDate').innerHTML = `❌ अमान्य मिति`;
+            document.getElementById('converterResult').style.display = 'block';
+            return;
+        }
+        
+        const bs = ADToBS(adDate);
+        if (!bs) {
+            document.getElementById('convertedDate').innerHTML = `❌ मिति धेरै पुरानो छ`;
+            document.getElementById('converterResult').style.display = 'block';
+            return;
+        }
+        
+        document.getElementById('convertedDate').innerHTML = `📅 ${bs.year} ${months[bs.month-1]} ${bs.day} (बि.सं.)`;
+        document.getElementById('convertedDay').innerHTML = `दिनको जानकारी मिति अनुसार हेर्नुहोस्`;
+        document.getElementById('converterResult').style.display = 'block';
+    }
+
+    function initConverter() {
+        const bsYearSelect = document.getElementById('bsYear');
+        for (let y = 2080; y <= 2090; y++) {
+            const opt = document.createElement('option');
+            opt.value = y;
+            opt.textContent = y;
+            bsYearSelect.appendChild(opt);
+        }
+        bsYearSelect.value = 2083;
+        
+        const bsMonthSelect = document.getElementById('bsMonth');
+        months.forEach((m, i) => {
+            const opt = document.createElement('option');
+            opt.value = i + 1;
+            opt.textContent = m;
+            bsMonthSelect.appendChild(opt);
+        });
+        
+        const bsDaySelect = document.getElementById('bsDay');
+        for (let d = 1; d <= 32; d++) {
+            const opt = document.createElement('option');
+            opt.value = d;
+            opt.textContent = d;
+            bsDaySelect.appendChild(opt);
+        }
+        
+        const adYearSelect = document.getElementById('adYear');
+        for (let y = 2020; y <= 2035; y++) {
+            const opt = document.createElement('option');
+            opt.value = y;
+            opt.textContent = y;
+            adYearSelect.appendChild(opt);
+        }
+        adYearSelect.value = 2026;
+        
+        const adMonthSelect = document.getElementById('adMonth');
+        for (let m = 1; m <= 12; m++) {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = m;
+            adMonthSelect.appendChild(opt);
+        }
+        
+        const adDaySelect = document.getElementById('adDay');
+        for (let d = 1; d <= 31; d++) {
+            const opt = document.createElement('option');
+            opt.value = d;
+            opt.textContent = d;
+            adDaySelect.appendChild(opt);
+        }
+    }
+
+    // To-Do List फंक्सनहरू
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+    
+    function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+    
+    function renderTodoList() {
+        const todoList = document.getElementById('todoList');
+        const todoStats = document.getElementById('todoStats');
+        
+        if (todos.length === 0) {
+            todoList.innerHTML = '<li style="text-align:center; color:#888; padding:20px;">✨ कुनै कार्य छैन। नयाँ कार्य थप्नुहोस् ✨</li>';
+            todoStats.innerHTML = '📋 कुल ० कार्यहरू';
+            return;
+        }
+        
+        todoList.innerHTML = '';
+        let completedCount = 0;
+        
+        todos.forEach((todo, index) => {
+            if (todo.completed) completedCount++;
+            const li = document.createElement('li');
+            li.className = 'todo-item';
+            li.innerHTML = `
+                <div class="todo-text ${todo.completed ? 'completed' : ''}" onclick="toggleTodo(${index})">${escapeHtml(todo.text)}</div>
+                <div class="todo-actions">
+                    <button class="delete-todo-btn" onclick="deleteTodo(${index})">🗑️</button>
+                </div>
+            `;
+            todoList.appendChild(li);
+        });
+        
+        todoStats.innerHTML = `📋 कुल ${todos.length} कार्यहरू (${completedCount} पूरा भएको, ${todos.length - completedCount} बाँकी)`;
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function addTodo() {
+        const input = document.getElementById('todoInput');
+        const text = input.value.trim();
+        if (text === '') {
+            alert('कृपया कार्य लेख्नुहोस्!');
+            return;
+        }
+        todos.push({ text: text, completed: false });
+        saveTodos();
+        renderTodoList();
+        input.value = '';
+    }
+    
+    function toggleTodo(index) {
+        todos[index].completed = !todos[index].completed;
+        saveTodos();
+        renderTodoList();
+    }
+    
+    function deleteTodo(index) {
+        todos.splice(index, 1);
+        saveTodos();
+        renderTodoList();
+    }
+
+    // क्यालेन्डर फंक्सनहरू
     function getCurrentBSDate() {
-        const startBS = new Date(2026, 3, 14); // 2083/01/01 = 2026 April 14
-        const today = new Date();
-        
-        // समय क्षेत्रको समस्या हटाउन
-        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
         const startUTC = new Date(Date.UTC(2026, 3, 14));
-        
+        const today = new Date();
+        const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
         const diffDays = Math.floor((todayUTC - startUTC) / (1000 * 60 * 60 * 24));
         
         if (diffDays < 0) return { month: 1, day: 1 };
@@ -671,17 +1126,15 @@
         return { month: 1, day: 1 };
     }
 
-    // महिनाको तथ्यांक देखाउने
     function renderStats() {
         const monthNum = currentMonth + 1;
-        const stats = schoolData[monthNum] || { "विद्यालय खुल्ने दिन": 0, "अध्यापन हुने दिन": 0, "बर्षे बिदा": 0, "स्थानिय बिदा": 0 };
-        
+        const stats = schoolData[monthNum] || { "विद्यालय खुल्ने दिन": 0, "अध्यापन हुने दिन": 0, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 };
         const statsCard = document.getElementById('statsCard');
         if (statsCard) {
             statsCard.innerHTML = `
                 <div class="stat-item"><div class="stat-label">🏫 विद्यालय खुल्ने दिन</div><div class="stat-value">${stats["विद्यालय खुल्ने दिन"]}</div></div>
                 <div class="stat-item"><div class="stat-label">📚 अध्यापन हुने दिन</div><div class="stat-value">${stats["अध्यापन हुने दिन"]}</div></div>
-                <div class="stat-item"><div class="stat-label">🌧️ बर्षे बिदा</div><div class="stat-value">${stats["बर्षे बिदा"]}</div></div>
+                <div class="stat-item"><div class="stat-label">🌧️ वर्षे बिदा</div><div class="stat-value">${stats["वर्षे बिदा"]}</div></div>
                 <div class="stat-item"><div class="stat-label">🏖️ स्थानिय बिदा</div><div class="stat-value">${stats["स्थानिय बिदा"]}</div></div>
             `;
         }
@@ -698,28 +1151,27 @@
         });
     }
 
-    // तारिख देखि दिन बाँकी/अघि गणना
     function getDaysRemaining(month, day) {
         const todayBS = getCurrentBSDate();
-        const targetDate = { month: month, day: day };
-        
-        // target date को दिन नम्बर निकाल्ने
         function getDayOfYear(month, day) {
             let days = 0;
-            for (let i = 0; i < month - 1; i++) {
-                days += daysInMonth[i];
-            }
-            days += day;
-            return days;
+            for (let i = 0; i < month - 1; i++) days += daysInMonth[i];
+            return days + day;
         }
-        
-        const todayDays = getDayOfYear(todayBS.month, todayBS.day);
-        const targetDays = getDayOfYear(targetDate.month, targetDate.day);
-        const diff = targetDays - todayDays;
-        
+        const diff = getDayOfYear(month, day) - getDayOfYear(todayBS.month, todayBS.day);
         if (diff === 0) return "आजको मिति";
         if (diff > 0) return `${diff} दिन बाँकी`;
         return `${Math.abs(diff)} दिन अघि`;
+    }
+
+    function getEmojiForDay(isHoliday, isActivity, activityText, holidayText) {
+        if (isHoliday && holidayText && holidayText.includes('वर्षे बिदा')) return '🌧️☔';
+        if (isHoliday) return '🎉';
+        if (isActivity && activityText && activityText.includes('Exam')) return '✍️';
+        if (isActivity && activityText && activityText.includes('Staff meeting')) return '🧑‍🏫👥';
+        if (isActivity && activityText && activityText.includes('birthday')) return '🎂';
+        if (isActivity) return '📌';
+        return '';
     }
 
     function renderCalendar() {
@@ -729,7 +1181,6 @@
         const grid = document.getElementById('calendarGrid');
         grid.innerHTML = '';
         
-        // खाली सेलहरू
         for (let i = 0; i < start; i++) {
             const empty = document.createElement('div');
             empty.className = 'calendar-day';
@@ -739,7 +1190,6 @@
         }
         
         const todayBS = getCurrentBSDate();
-        
         for (let day = 1; day <= days; day++) {
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-day';
@@ -750,22 +1200,12 @@
             const isActivity = activities[key];
             const isToday = (todayBS.month === monthNum && todayBS.day === day);
             
-            if (isToday) {
-                dayDiv.classList.add('today');
-            } else if (isWeekend) {
-                dayDiv.classList.add('weekend-day');
-            }
-            if (isHoliday && !isToday) {
-                dayDiv.classList.add('holiday-day');
-            }
-            if (isActivity && !isHoliday && !isToday) {
-                dayDiv.classList.add('activity-day');
-            }
+            if (isToday) dayDiv.classList.add('today');
+            else if (isWeekend) dayDiv.classList.add('weekend-day');
+            if (isHoliday && !isToday) dayDiv.classList.add('holiday-day');
+            if (isActivity && !isHoliday && !isToday) dayDiv.classList.add('activity-day');
             
-            let emoji = '';
-            if (isHoliday) emoji = '🎉';
-            else if (isActivity) emoji = '📌';
-            
+            const emoji = getEmojiForDay(isHoliday, isActivity, activities[key], holidays[key]);
             dayDiv.innerHTML = `<div class="day-number">${day}</div><div class="day-emoji">${emoji}</div>`;
             dayDiv.onclick = (function(m, d) { return function() { showDateDetails(m, d); }; })(monthNum, day);
             grid.appendChild(dayDiv);
@@ -782,7 +1222,7 @@
         bodyMsg += `<p>🕒 ${daysLeft}</p>`;
         if(hol) bodyMsg += `<p>🎉 <strong>बिदा:</strong> ${hol}</p>`;
         if(act) bodyMsg += `<p>📌 <strong>गतिविधि:</strong> ${act}</p>`;
-        if(!hol && !act) bodyMsg += `<p>🙁 कुनै बिशेष गतिविधि छैन</p>`;
+        if(!hol && !act) bodyMsg += `<p>🙁 कुनै विशेष गतिविधि छैन</p>`;
         
         document.getElementById('modalTitle').innerHTML = `📅 ${months[month-1]} ${day}`;
         document.getElementById('modalBody').innerHTML = bodyMsg;
@@ -792,7 +1232,7 @@
     function changeMonth() {
         currentMonth = parseInt(document.getElementById('monthSelect').value);
         renderCalendar();
-        renderStats();  // महिना छान्दा तथ्यांक अपडेट गर्ने
+        renderStats();
     }
 
     function initCalendar() {
@@ -804,18 +1244,12 @@
             opt.textContent = m;
             select.appendChild(opt);
         });
-        
-        // आजको महिना सेट गर्ने
         const todayBS = getCurrentBSDate();
-        currentMonth = todayBS.month - 1;
-        if (currentMonth < 0) currentMonth = 0;
+        currentMonth = Math.max(0, todayBS.month - 1);
         select.value = currentMonth;
-        
-        // महिना परिवर्तनको event listener
         select.addEventListener('change', changeMonth);
-        
         renderCalendar();
-        renderStats();  // सुरुमा पनि तथ्यांक देखाउने
+        renderStats();
     }
 
     // TSC क्याल्कुलेटर
@@ -864,27 +1298,36 @@
         resultDiv.style.display = 'block';
     };
 
-    // फोन कल, लिंक र कपी
     function makeCall(phone) { 
-        window.location.href = `tel:${phone}`; 
+        if(phone) window.location.href = `tel:${phone}`; 
     }
+    
     function openLink(url) { 
-        window.open(url, '_blank'); 
+        if(url) window.open(url, '_blank'); 
     }
+    
     function copyNumber(phone) { 
-        navigator.clipboard.writeText(phone); 
-        alert(`फोन नम्बर कपी गरियो: ${phone}`); 
+        if(phone) {
+            navigator.clipboard.writeText(phone)
+                .then(() => alert(`फोन नम्बर कपी गरियो: ${phone}`))
+                .catch(() => alert('कपी गर्न सकिएन। कृपया म्यानुअल रूपमा नोट गर्नुहोस्।'));
+        }
     }
 
-    // पेज नेभिगेसन
     function switchPage(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-        document.getElementById(`${pageId}Page`).classList.add('active-page');
+        const targetPage = document.getElementById(`${pageId}Page`);
+        if(targetPage) targetPage.classList.add('active-page');
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.nav-btn[data-page="${pageId}"]`).classList.add('active');
+        const activeBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
+        if(activeBtn) activeBtn.classList.add('active');
+        
+        if (pageId !== 'tsc') {
+            const tscResult = document.getElementById('tscResult');
+            if(tscResult) tscResult.style.display = 'none';
+        }
     }
 
-    // इभेन्ट ह्यान्डलरहरू
     document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.addEventListener('click', () => switchPage(btn.getAttribute('data-page')));
     });
@@ -892,26 +1335,37 @@
     document.querySelectorAll('.call-btn').forEach(btn => {
         btn.addEventListener('click', (e) => { 
             e.stopPropagation(); 
-            makeCall(btn.getAttribute('data-phone')); 
+            const phone = btn.getAttribute('data-phone');
+            if(phone) makeCall(phone); 
         });
     });
     
     document.querySelectorAll('.link-item').forEach(link => {
-        link.addEventListener('click', () => openLink(link.getAttribute('data-url')));
+        link.addEventListener('click', () => {
+            const url = link.getAttribute('data-url');
+            if(url) openLink(url);
+        });
     });
     
-    document.querySelector('.phone-number')?.addEventListener('click', () => copyNumber('9845285331'));
+    const phoneElement = document.querySelector('.phone-number');
+    if(phoneElement) {
+        phoneElement.addEventListener('click', () => copyNumber('9845285331'));
+    }
     
     window.closeModal = () => {
         document.getElementById('modal').style.display = 'none';
     };
     
-    document.getElementById('modal').addEventListener('click', (e) => { 
-        if(e.target === document.getElementById('modal')) closeModal(); 
-    });
+    const modal = document.getElementById('modal');
+    if(modal) {
+        modal.addEventListener('click', (e) => { 
+            if(e.target === modal) closeModal(); 
+        });
+    }
 
-    // एप सुरु गर्ने
     initCalendar();
+    initConverter();
+    renderTodoList();
     switchPage('calendar');
 </script>
 </body>
