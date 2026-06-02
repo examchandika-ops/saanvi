@@ -216,11 +216,7 @@
             position: absolute;
             top: 2px;
             right: 2px;
-            font-size: 8px;
-            background: #ff5722;
-            color: white;
-            border-radius: 10px;
-            padding: 1px 4px;
+            font-size: 10px;
         }
 
         .today {
@@ -646,6 +642,18 @@
             line-height: 1.5;
         }
 
+        .reminder-btn-in-modal {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+        }
+
         .modal-close {
             background: #673AB7;
             color: white;
@@ -655,6 +663,7 @@
             width: 100%;
             cursor: pointer;
             font-weight: bold;
+            margin-top: 10px;
         }
 
         @media (max-width: 480px) {
@@ -800,6 +809,7 @@
     <div class="modal-content">
         <div class="modal-header" id="modalTitle"></div>
         <div class="modal-body" id="modalBody"></div>
+        <button class="reminder-btn-in-modal" id="reminderModalBtn">🔔 रिमाइन्डर सेट/सम्पादन</button>
         <button class="modal-close" onclick="closeModal()">बन्द गर्नुहोस्</button>
     </div>
 </div>
@@ -814,6 +824,8 @@
     // रिमाइन्डरहरूको लागि localStorage
     let reminders = JSON.parse(localStorage.getItem('reminders')) || {};
     let currentReminderDate = null;
+    let currentModalMonth = null;
+    let currentModalDay = null;
 
     const schoolData = {
         1: { "विद्यालय खुल्ने दिन": 20, "अध्यापन हुने दिन": 8, "वर्षे बिदा": 0, "स्थानिय बिदा": 0 },
@@ -845,7 +857,7 @@
     holidays["5-26"] = "🌧️☔ वर्षे बिदा";
     holidays["5-30"] = "🌧️☔ वर्षे बिदा";
     holidays["5-31"] = "🌧️☔ वर्षे बिदा";
-    holidays["7-2"] = "🗡️ महानवमी";
+    holidays["7-2"] = "🗡️ महाअष्ठमी";
     holidays["7-3"] = "🗡️ महानवमी";
     
     for (let i = 26; i <= 30; i++) holidays[`6-${i}`] = "🏖️ दशै बिदा";
@@ -858,7 +870,7 @@
 
     let activities = {
         "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting 🧑‍🏫👥",
-        "2-8": "🗳️ विद्यालय मतदान", "2-26": "🗳️ छात्रावृत्ति वितरण",
+        "2-8": "🗳️ विद्यालय मतदान", "2-22 बक्तृत्वकला तथा हस्तलेखन": "🗳️ ", "2-26": "🗳️ छात्रवृत्ति वितरण",
         "2-29": "🥎 🏛️ Staff meeting 🧑‍🏫👥", "3-26": "🗳️ चित्रकला/Quiz",
         "3-32": "🏛️ Staff meeting 🧑‍🏫👥", "4-7": "✍️ English Exam",
         "4-8": "✍️ Nepali Exam", "4-11": "✍️ Mathematic Exam",
@@ -886,7 +898,7 @@
     let currentMonth = 0;
 
     // BS to AD conversion (२०६०-२०८५)
-    const bsStartDate = new Date(2003, 3, 14); // 2060 BS = 2003 AD April 14
+    const bsStartDate = new Date(2003, 3, 14);
     
     function BSToAD(year, month, day) {
         let totalDays = 0;
@@ -1148,8 +1160,36 @@
                 badge.textContent = '🔔';
                 dayDiv.appendChild(badge);
             }
-            dayDiv.onclick = (function(m, d) { return function() { openReminderModal(m, d); }; })(monthNum, day);
+            dayDiv.onclick = (function(m, d) { return function() { openDateDetailModal(m, d); }; })(monthNum, day);
             grid.appendChild(dayDiv);
+        }
+    }
+
+    function openDateDetailModal(month, day) {
+        currentModalMonth = month;
+        currentModalDay = day;
+        const key = `${month}-${day}`;
+        const hol = holidays[key];
+        const act = activities[key];
+        const reminder = reminders[key];
+        const daysLeft = getDaysRemaining(month, day);
+        
+        let bodyMsg = `<p>📅 मिति: ${months[month-1]} ${day}, ${bsYear}</p>`;
+        bodyMsg += `<p>🕒 ${daysLeft}</p>`;
+        if(hol) bodyMsg += `<p>🎉 <strong>बिदा:</strong> ${hol}</p>`;
+        if(act) bodyMsg += `<p>📌 <strong>गतिविधि:</strong> ${act}</p>`;
+        if(reminder) bodyMsg += `<p>🔔 <strong>तपाईंको रिमाइन्डर:</strong> ${reminder}</p>`;
+        if(!hol && !act && !reminder) bodyMsg += `<p>🙁 कुनै विशेष गतिविधि छैन</p>`;
+        
+        document.getElementById('modalTitle').innerHTML = `📅 ${months[month-1]} ${day}`;
+        document.getElementById('modalBody').innerHTML = bodyMsg;
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function openReminderFromModal() {
+        if (currentModalMonth && currentModalDay) {
+            closeModal();
+            openReminderModal(currentModalMonth, currentModalDay);
         }
     }
 
@@ -1171,7 +1211,9 @@
         localStorage.setItem('reminders', JSON.stringify(reminders));
         closeReminderModal();
         renderCalendar();
-        showDateDetails(parseInt(currentReminderDate.split('-')[0]), parseInt(currentReminderDate.split('-')[1]));
+        if (currentModalMonth && currentModalDay) {
+            openDateDetailModal(currentModalMonth, currentModalDay);
+        }
     }
 
     function deleteReminder() {
@@ -1179,32 +1221,14 @@
         localStorage.setItem('reminders', JSON.stringify(reminders));
         closeReminderModal();
         renderCalendar();
-        showDateDetails(parseInt(currentReminderDate.split('-')[0]), parseInt(currentReminderDate.split('-')[1]));
+        if (currentModalMonth && currentModalDay) {
+            openDateDetailModal(currentModalMonth, currentModalDay);
+        }
     }
 
     function closeReminderModal() {
         document.getElementById('reminderModal').style.display = 'none';
         currentReminderDate = null;
-    }
-
-    function showDateDetails(month, day) {
-        const key = `${month}-${day}`;
-        const hol = holidays[key];
-        const act = activities[key];
-        const reminder = reminders[key];
-        const daysLeft = getDaysRemaining(month, day);
-        
-        let bodyMsg = `<p>📅 मिति: ${months[month-1]} ${day}, ${bsYear}</p>`;
-        bodyMsg += `<p>🕒 ${daysLeft}</p>`;
-        if(hol) bodyMsg += `<p>🎉 <strong>बिदा:</strong> ${hol}</p>`;
-        if(act) bodyMsg += `<p>📌 <strong>गतिविधि:</strong> ${act}</p>`;
-        if(reminder) bodyMsg += `<p>🔔 <strong>तपाईंको रिमाइन्डर:</strong> ${reminder}</p>`;
-        if(!hol && !act && !reminder) bodyMsg += `<p>🙁 कुनै विशेष गतिविधि छैन</p>`;
-        bodyMsg += `<p style="margin-top:10px;"><button onclick="openReminderModal(${month},${day})" style="background:#673AB7;color:white;border:none;padding:8px 16px;border-radius:40px;cursor:pointer;">✏️ रिमाइन्डर सेट/सम्पादन</button></p>`;
-        
-        document.getElementById('modalTitle').innerHTML = `📅 ${months[month-1]} ${day}`;
-        document.getElementById('modalBody').innerHTML = bodyMsg;
-        document.getElementById('modal').style.display = 'flex';
     }
 
     function changeMonth() {
@@ -1409,6 +1433,8 @@
             if(e.target === modal) closeModal(); 
         });
     }
+    
+    document.getElementById('reminderModalBtn').addEventListener('click', openReminderFromModal);
 
     initCalendar();
     initConverter();
