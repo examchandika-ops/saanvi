@@ -781,7 +781,7 @@
                 <div class="contact-title">🚨 आपत्कालीन सम्पर्क</div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">प्रहरी</div></div><button class="call-btn" data-phone="100">📞 100</button></div>
                 <div class="contact-item"><div class="contact-info"><div class="contact-name">एम्बुलेन्स</div></div><button class="call-btn" data-phone="102">📞 102</button></div>
-                <div class="contact-item"><div class="contact-info"><div class="contact-name">अग्नि नियन्त्रक</div></div><button class="call-btn" data-phone="101">📞 101</button></div>
+                <div class="contact-item"><div class="contact-info"><div class="contact-name">बाल हेल्प लाइन</div></div><button class="call-btn" data-phone="1098">📞 1098</button></div>
             </div>
         </div>
     </div>
@@ -869,27 +869,28 @@
     holidays["8-4"] = "🌧️☔ वर्षे बिदा";
 
     let activities = {
-        "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting 🧑‍🏫👥",
-        "2-8": "🗳️ विद्यालय मतदान", "2-22 बक्तृत्वकला तथा हस्तलेखन": "🗳️ ", "2-26": "🗳️ छात्रवृत्ति वितरण",
-        "2-29": "🥎 🏛️ Staff meeting 🧑‍🏫👥", "3-26": "🗳️ चित्रकला/Quiz",
-        "3-32": "🏛️ Staff meeting 🧑‍🏫👥", "4-7": "✍️ English Exam",
+        "1-30": "🏛️ कक्षा ११ नतिजा", "1-31": "🏛️ Staff meeting 🧑🏫👥",
+        "2-8": "🗳️ विद्यालय मतदान", "2-22": "🗳️ वक्‍तृत्वकला", 
+        "2-26": "🗳️ छात्रावृत्ति वितरण",
+        "2-29": "🥎 🏛️ Staff meeting 🧑🏫👥", "3-26": "🗳️ चित्रकला/Quiz",
+        "3-32": "🏛️ Staff meeting 🧑🏫👥", "4-7": "✍️ English Exam",
         "4-8": "✍️ Nepali Exam", "4-11": "✍️ Mathematic Exam",
         "4-12": "✍️ Science Exam", "4-13": "✍️ Local/Social Exam",
-        "4-14": "✍️ HPE/OPT1 Exam", "4-15": "✍️ OPT2 Exam/Staff meeting 🧑‍🏫👥",
-        "5-25": "🏛️ Staff meeting 🧑‍🏫👥", "5-29": "✍️ बाल दिवस",
+        "4-14": "✍️ HPE/OPT1 Exam", "4-15": "✍️ OPT2 Exam/Staff meeting 🧑🏫👥",
+        "5-25": "🏛️ Staff meeting 🧑🏫👥", "5-29": "✍️ बाल दिवस",
         "6-2": "🗳️ गणित तथा विज्ञान प्रदर्शनी", "6-23": "🗳️ दशै विशेष कार्यक्रम",
-        "8-28": "🏛️ Staff meeting 🧑‍🏫👥", "8-29": "✍️ English Exam",
+        "8-28": "🏛️ Staff meeting 🧑🏫👥", "8-29": "✍️ English Exam",
         "9-2": "✍️ Nepali Exam", "9-1": "✍️ Mathematic Exam",
         "9-3": "✍️ Social Exam/serofero", "9-6": "✍️ Science Exam/Local(1-3)",
         "9-7": "✍️ HPE/OPT1 Exam/School(0-3)", "9-8": "✍️ School(0-3)/Local/OPT2 Exam",
-        "9-30": "🏛️ Staff meeting 🧑‍🏫👥", "10-8": "🗳️ योगा कार्यक्रम",
-        "10-28": "🗳️ श्रीपञ्चमी", "10-29": "🏛️ Staff meeting 🧑‍🏫👥",
+        "9-30": "🏛️ Staff meeting 🧑🏫👥", "10-8": "🗳️ योगा कार्यक्रम",
+        "10-28": "🗳️ श्रीपञ्चमी", "10-29": "🏛️ Staff meeting 🧑🏫👥",
         "11-10": "🗳️ खेलकुद", "11-11": "🎂 birthday wala emo 🎂",
-        "11-28": "🏛️ Staff meeting 🧑‍🏫👥", "12-18": "✍️ English Exam",
+        "11-28": "🏛️ Staff meeting 🧑🏫👥", "12-18": "✍️ English Exam",
         "12-19": "✍️ Nepali Exam", "12-22": "✍️ Mathematic Exam",
         "12-23": "✍️ Social Exam", "12-24": "✍️ HPE/OPT1 Exam",
         "12-25": "✍️ Science Exam", "12-26": "✍️ Local/OPT2 Exam",
-        "12-30": "🏆📊🎉 नतिजा प्रकाशन/Staff meeting 🧑‍🏫👥"
+        "12-30": "🏆📊🎉 नतिजा प्रकाशन/Staff meeting 🧑🏫👥"
     };
     
     for (let i = 15; i <= 17; i++) activities[`1-${i}`] = "🏖️ भर्ना अभियान";
@@ -1114,7 +1115,7 @@
         if (isHoliday && holidayText && holidayText.includes('वर्षे बिदा')) return '🌧️☔';
         if (isHoliday) return '🎉';
         if (isActivity && activityText && activityText.includes('Exam')) return '✍️';
-        if (isActivity && activityText && activityText.includes('Staff meeting')) return '🧑‍🏫👥';
+        if (isActivity && activityText && activityText.includes('Staff meeting')) return '🧑🏫👥';
         if (isActivity && activityText && activityText.includes('birthday')) return '🎂';
         if (isActivity) return '📌';
         return '';
